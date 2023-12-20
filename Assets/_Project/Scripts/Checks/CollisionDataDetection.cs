@@ -28,7 +28,7 @@ public class CollisionDataDetection : MonoBehaviour
         Friction = 0f;
     }
 
-    void EvaluateCollision(Collision2D collision)
+    public void EvaluateCollision(Collision2D collision)
     {
         for (int i = 0; i < collision.contactCount; i++)
         {
