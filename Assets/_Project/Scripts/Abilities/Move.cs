@@ -13,6 +13,7 @@ public class Move : MonoBehaviour
     Vector2 _velocity;
     Rigidbody2D _rigidbody;
     CollisionDataDetection _collisionDataDetection;
+    Animator _playerAnimator;
 
     float _maxSpeedChange;
     float _acceleration;
@@ -23,6 +24,7 @@ public class Move : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody2D>();
         _collisionDataDetection = GetComponent<CollisionDataDetection>();
         _controller = GetComponent<Controller>();
+        _playerAnimator = GetComponent<Animator>();
     }
 
     void Update()
@@ -41,5 +43,16 @@ public class Move : MonoBehaviour
         _velocity.x = Mathf.MoveTowards(_velocity.x, _desiredVelocity.x, _maxSpeedChange);
 
         _rigidbody.velocity = _velocity;
+        if (_playerAnimator != null)
+        {
+            if (Mathf.Abs(_rigidbody.velocity.x) > 0.1f)
+            {
+                _playerAnimator.SetBool("isRunning", true);
+            }
+            else
+            {
+                _playerAnimator.SetBool("isRunning", false);
+            }
+        }
     }
 }
